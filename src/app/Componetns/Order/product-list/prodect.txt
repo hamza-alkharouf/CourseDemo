@@ -1,0 +1,123 @@
+
+<div class="mb-3">
+  <label for="" class="form-label">Category:</label>
+  <!-- <select #cat class="form-select" name="cat" id="prdCat" onchange="getSelectCat(cat.value)"> -->
+      <!-- <select #cat class="form-select" name="cat" id="prdCat" onchange="getSelectCat($event)"> //in ts: event.tatget.value -->
+
+    <select  class="form-select" name="cat" id="prdCat"  [(ngModel)]="selectedCatID" >
+    <option selected>Select one</option>
+    <option *ngFor="let cat of catList" [value]="cat.id">{{cat.name}}</option>
+  </select>
+</div>
+
+<div class="text-secondary">
+  {{selectedCatID}}
+  <button type="button" class="btn btn-primary" (click)="changeCat()">change Category</button>
+</div>
+
+<br>
+Order's Date: {{orderDate |date}}
+
+
+<hr>
+<table class="table">
+  <thead>
+      <th>#</th>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Av. Quantity</th>
+      <th>Price in USD</th>
+      <th>Price in ERU</th>
+
+      <th>Count</th>
+      <td>Buy</td>
+  </thead>
+  <tbody>
+
+    <!-- <tr *ngFor="let prd of prdList; let i = index;" [ngClass]="{'bg-warning':prd.quantity ==0,'text-primary':prd.quantity ==0}" > -->
+      <tr *ngFor="let prd of prdList; let i = index;" [ngStyle]="{'background-color':prd.quantity ==0?'lightyeelo':'lightgray'  ,'color':prd.quantity ==0?'darkred':'darkblue'}" >
+
+      <td >{{i+1}}</td>
+      <!-- <td ><img LightBox highLightColor="red" [src]="prd.imgURL" alt="image"></td> -->
+      <!-- <td ><img [LightBox]="ReadFromPropInTS" [src]="prd.imgURL" alt="image"></td> -->
+
+      <td ><img LightBox="red" [src]="prd.imgURL" alt="image"></td>
+
+      <td >{{prd.name}}</td>
+
+      <td >
+        <div *ngIf="prd.quantity!=0 else outOfStock">{{prd.quantity}}</div>
+        <ng-template #outOfStock>Out of Stock</ng-template>
+      </td>
+      <!-- <td >{{prd.price  | currency:'EUR' }}</td> -->
+      <!-- <td >{{prd.price  | currency:'USD' }}</td> -->
+      <td >{{prd.price  | currency }}</td>
+
+      <td >{{prd.price |uSDtoEUR | currency:'EUR'}}</td>
+
+      <td><input #itemsCount type="number" class="form-control"/></td>
+      <td><button class="btn btn-secondary" (click)="buy(prd.price,itemsCount.value);">Buy</button></td>
+
+    </tr>
+  </tbody>
+
+</table>
+<h3>Order Total price: {{totalPrice}}</h3>
+
+
+
+
+
+
+    <!-- <tr *ngFor="let prd of prdList" [class.bg-warning]="prd.quantity==0"> -->
+      <!-- <tr *ngFor="let prd of prdList; index as i" -->
+
+
+      <!-- <tr *ngFor="let prd of prdList; let i = index; trackBy:prdTrackByFn"
+      [class.d-none]="selectedCatID!=prd.categoryId"
+      [style.background-color]="(prd.quantity==0)? 'red':'lightgray'"
+      > -->
+
+        <!-- runtime ->always change// hidden fast  ,حتى مترحش دائما على,دوم -->
+        <!--  dont change ngif  هون خلص مره وحده بتروح فا عادي-->
+<!--
+        <tr *ngFor="let prd of prdList; let i = index;" [hidden]="prd.quantity==0" >
+          <td >{{i+1}}</td>
+          <td ><img [src]="prd.imgURL" alt="image"></td>
+
+          <td >{{prd.name}}</td>
+          <td >{{prd.quantity}}</td>
+          <td >{{prd.price}}</td>
+          <td><input #itemsCount type="number" class="form-control"/></td> -->
+          <!-- <td><button class="btn btn-secondary" (click)="buy(prd.id,itemsCount.valueAsNumber);">Buy</button></td> -->
+          <!-- <td><button class="btn btn-secondary" (click)="buy(prd.price,itemsCount.value);">Buy</button></td>
+
+        </tr> -->
+
+<!--
+<ng-container [ngSwitch]="prd.quantity">
+  <div *ngSwitchCase="0">Out of stock</div>
+  <div *ngSwitchCase="1">Last item!</div>
+  <div *ngSwitchCase="2">Last 2 items</div>
+  <div *ngSwitchDefault>{{prd.quantity}}</div>
+</ng-container> -->
+
+
+
+
+
+<!--
+<ng-container *ngFor="let prd of prdList; let i = index;" >
+  <tr *ngIf="prd.quantity==0">
+<td >{{i+1}}</td>
+<td ><img [src]="prd.imgURL" alt="image"></td>
+
+<td >{{prd.name}}</td>
+<td >{{prd.quantity}}</td>
+<td >{{prd.price}}</td>
+<td><input #itemsCount type="number" class="form-control"/></td> -->
+<!-- <td><button class="btn btn-secondary" (click)="buy(prd.id,itemsCount.valueAsNumber);">Buy</button></td> -->
+<!-- <td><button class="btn btn-secondary" (click)="buy(prd.price,itemsCount.value);">Buy</button></td>
+</tr>
+</ng-container> -->
+

@@ -1,0 +1,15 @@
+<p>order-master works!</p>
+
+
+<div class="mb-3">
+  <label for="" class="form-label">Category:</label>
+
+    <select  class="form-select" name="cat" id="prdCat"  [(ngModel)]="selectedCatID">
+    <option selected>Select one</option>
+    <option *ngFor="let cat of catList" [value]="cat.id">{{cat.name}}</option>
+  </select>
+</div>
+<hr>
+<app-product-list></app-product-list>
+<hr>
+<h3>Order Tolal Price:{{OrderTotalPrice}}</h3>

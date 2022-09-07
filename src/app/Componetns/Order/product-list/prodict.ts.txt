@@ -1,0 +1,67 @@
+import { Component, OnInit } from '@angular/core';
+import { ICategory } from 'src/Models/icategory';
+import { IProduct } from 'src/Models/iproduct';
+
+@Component({
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.scss']
+})
+export class ProductListComponent implements OnInit {
+
+  catList:ICategory[]|null;
+  selectedCatID:number=0;
+  prdList:IProduct[] | null;
+  totalPrice:number=0;
+  orderDate:Date;
+  constructor() {
+    this.prdList=[
+      {id:1, name:"Dell Vostro",price:100000,quantity:4,categoryId:1,imgURL:'https://fakeimg.pl/200x100/'},
+      {id:2, name:"Lenovo Thinkpad",price:4000,quantity:2,categoryId:1,imgURL:'https://fakeimg.pl/200x100/'},
+      {id:3, name:"Apple Macbook",price:200.50,quantity:0,categoryId:1,imgURL:'https://fakeimg.pl/200x100/'},
+
+      {id:4, name:"Lenovo Tab 2",price:400,quantity:2,categoryId:2,imgURL:'https://fakeimg.pl/200x100/'},
+      {id:4, name:"Samsung Tab",price:50.50,quantity:4,categoryId:2,imgURL:'https://fakeimg.pl/200x100/'},
+      {id:5, name:"Samsung Note 3",price:555.50,quantity:0,categoryId:2,imgURL:'https://fakeimg.pl/200x100/'},
+
+      {id:6, name:"Samsung S22",price:1000,quantity:3,categoryId:3,imgURL:'https://fakeimg.pl/200x100/'},
+
+    ]
+
+
+    this.catList=[
+      {id:1, name:'Laptops'},
+      {id:2, name:'Tablets'},
+      {id:3, name:'Mobiles'},
+    ]
+
+    this.orderDate=new Date();
+  }
+
+  // buy(prdId:number,count:number){
+    buy(prdPrice:number,count:any){
+
+      //let totalPrice:number =count*10 ;
+       //let itemsCount:number  ;
+      //  itemsCount= Number(count);
+      //  itemsCount= count as number;
+      //  itemsCount=+count;
+      //itemsCount=+count+10;
+       //itemsCount= parseInt(count);
+
+
+       this.totalPrice = +count*prdPrice;
+       console.log(this.totalPrice)
+  }
+
+  changeCat(){
+    this.selectedCatID=1
+  }
+
+  prdTrackByFn(index:number, prd:IProduct):number{
+    return prd.id
+   }
+  ngOnInit(): void {
+  }
+
+}

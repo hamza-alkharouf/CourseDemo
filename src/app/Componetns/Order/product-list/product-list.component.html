@@ -1,0 +1,58 @@
+<!--
+<div class="mb-3">
+  <label for="" class="form-label">Category:</label>
+
+    <select  class="form-select" name="cat" id="prdCat"  [(ngModel)]="selectedCatID" (change)="filterProductsByCarID()">
+    <option selected>Select one</option>
+    <option *ngFor="let cat of catList" [value]="cat.id">{{cat.name}}</option>
+  </select>
+</div> -->
+
+
+<br>
+Order's Date: {{orderDate |date}}
+
+
+<hr>
+<table class="table">
+  <thead>
+      <th>#</th>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Av. Quantity</th>
+      <th>Price in USD</th>
+      <th>Price in ERU</th>
+
+      <th>Count</th>
+      <td>Buy</td>
+  </thead>
+  <tbody>
+
+      <tr *ngFor="let prd of prdListOfCat; let i = index;" [ngStyle]="{'background-color':prd.quantity ==0?'lightyeelo':'lightgray'  ,'color':prd.quantity ==0?'darkred':'darkblue'}" >
+
+      <td >{{i+1}}</td>
+
+
+      <td ><img LightBox="red" [src]="prd.imgURL" alt="image"></td>
+
+      <td >{{prd.name}}</td>
+
+      <td >
+        <div *ngIf="prd.quantity!=0 else outOfStock">{{prd.quantity}}</div>
+        <ng-template #outOfStock>Out of Stock</ng-template>
+      </td>
+
+      <td >{{prd.price  | currency }}</td>
+
+      <td >{{prd.price |uSDtoEUR | currency:'EUR'}}</td>
+
+      <td><input #itemsCount type="number" class="form-control"/></td>
+      <td><button class="btn btn-secondary" (click)="buy(prd.price,itemsCount.value);">Buy</button></td>
+
+    </tr>
+  </tbody>
+
+</table>
+<h3>Order Total price: {{totalPrice}}</h3>
+
+

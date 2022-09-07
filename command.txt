@@ -1,0 +1,8 @@
+ng g c "componet"
+
+
+viewmodel
+ngn g class "storeData"
+
+//interface model
+ng g i IProduct
